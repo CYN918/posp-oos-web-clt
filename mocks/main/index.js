@@ -75,6 +75,111 @@ module.exports = {
             }
         }))
     },
+    '/AGT_012'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "subBranchList": [
+                    {paybankNo: '1', cityCode: '123', accbankNo: ''},
+                    {paybankNo: '2', cityCode: '1234', accbankNo: ''},
+                ]
+            }
+        }))
+    },
+    '/AGT_013'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "res": [
+                    {bankLogId: '1', bankName: '123', bankLogUrl: ''},
+                    {bankLogId: '2', bankName: '123', bankLogUrl: ''},
+                ]
+            }
+        }))
+    },
+    '/ACT_001'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "rows": [
+                    {policyActivationId: '1', record: '123',},
+                    {policyActivationId: '2', record: '1234',}
+                ]
+            }
+        }))
+    },
+    '/ACT_012'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "subBranchList": [
+                    {paybankNo: '中国银行', cityCode: '123', accbankNo: '龙华支行'},
+                    {paybankNo: '中国银行', cityCode: '123', accbankNo: '龙华支行'},
+                ]
+            }
+        }))
+    },
+    '/COU_001'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "rows": [
+                    {policyCouponId: '1', record: '123',},
+                    {policyCouponId: '2', record: '1234',}
+                ]
+            }
+        }))
+    },
+    '/ITY_001'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "rows": [
+                    {policyActivityId: '1', record: '123',},
+                    {policyActivityId: '2', record: '1234',}
+                ]
+            }
+        }))
+    },
+    '/POS_006'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "rows": [
+                    {price: '1', term: '123',},
+                    {price: '1', term: '123',},
+                ]
+            }
+        }))
+    },
     '/AGT_008'(req, res) {
         console.log(req.body.param);
         res.json(Mock.mock({
@@ -97,8 +202,85 @@ module.exports = {
             }
         }))
     },
+    '/AGT_014'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                rows: {
+                    agentId: '1',
+                    txnRate: '1',
+                    activationRate: '231',
+                    vipRate: '123',
+                    activityRate: '123',
+                }
+            }
+        }))
+    },
 
-
+    '/POS_011'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                pageTotal: 100,
+                total: 1000,
+                page: 3,
+                "rows|10": [
+                    {
+                        startSn: '终端号始  ',
+                        endSn: '终端号末    ',
+                        total: 123,
+                        name: '123',
+                        state: 1,
+                        anentName: '上级代理',
+                        createTime: '1234',
+                    }
+                ]
+            }
+        }))
+    },
+    '/POS_012'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                BODY: {}
+            }
+        }))
+    },
+    '/POS_014'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                rows: {
+                    orderNo: '订单号',
+                    price: '单价',
+                    num: '总数量',
+                    term: '总期数',
+                    amount: '保理总额',
+                    termAmount: '每期金额',
+                    agentName: '发送人',
+                    toAgentName: '接收人',
+                    policyName: '政策名称',
+                }
+                
+            }
+        }))
+    },
     '/POS_001'(req, res) {
         console.log(req.body.param);
         res.json(Mock.mock({
@@ -112,13 +294,12 @@ module.exports = {
                 page: 3,
                 "rows|10": [
                     {
-                        startSn: '终端号始	',
-                        endSn: '终端号末	',
-                        total: 123,
-                        name: '123',
-                        state: 1,
-                        anentName: '上级代理',
-                        createTime: '1234',
+                        prefix: '前缀',
+                        sn15: '序列号',
+                        random: '随机位',
+                        secretKey: '密钥',
+                        salt: '盐钥',
+                        factoryName: '厂商名称',
                     }
                 ]
             }
@@ -132,6 +313,22 @@ module.exports = {
                 CODE: '000'
             },
             BODY: {}
+        }))
+    },
+    '/POS_003'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                rows: 
+                {
+                    startSn: 'SN始',
+                    endSn: 'SN末',
+                }
+            }
         }))
     },
     '/POS_009'(req, res) {
@@ -152,6 +349,62 @@ module.exports = {
                         factoryName: '厂商名称',
                         posModel: '支持终端型号',
                         posName: '终端名称',
+                    }
+                ]
+            }
+        }))
+    },
+    '/POS_010'(req, res) {
+        console.log(req,body,param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                rows:  {
+                    factoryId: 1,                       
+                    factoryName: '厂商名称',
+                }
+            }
+        }))
+    },
+    '/POS_007'(req, res) {
+        console.log(req,body,param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                rows:  {
+                    idPicture: 'txt文件',
+                    factoryId: '厂商ID',
+                }
+            }
+        }))
+    },
+    '/POS_013'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                pageTotal: 100,
+                total: 1000,
+                page: 3,
+                "rows|10": [
+                    {
+                        startSn: '终端号始',
+                        endSn: '终端号末',
+                        total: '几局数量',
+                        state: 1,
+                        agentName: '划拨人',
+                        toAgentName: '接收人',
+                        mobile: '划拨人手机号',
+                        toMobile: '接收人手机号',
                     }
                 ]
             }
@@ -259,6 +512,32 @@ module.exports = {
                         txnAmount: 123,
                         shareAmount: 123,
                         profitState: 1,
+                    }
+                ],
+                pageTotal: 1,
+                page: 1,
+                total: 100,
+            }
+        }))
+    },
+    '/SYS_006'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {
+                MSG: '',
+                CODE: '000'
+            },
+            BODY: {
+                "rows|10": [
+                    {
+                        versionId: 1,
+                        versionNum: 123,
+                        url: 12,
+                        isForced: 13,
+                        record: 123123,
+                        createTime: 123,
+                        intVersionNum: '123',
+                        versionType: 123,
                     }
                 ],
                 pageTotal: 1,
@@ -500,6 +779,26 @@ module.exports = {
                         "code": "nulla cupidatat consectetur",
                         "term": "consequat do",
                         "txnState": "Excepteur Lorem"
+                    }
+                ],
+                pageTotal: 1,
+                page: 1,
+                total: 100,
+            }
+        }))
+    },
+    '/ACT_OO2'(req, res) {
+        console.log(req.body.param);
+        res.json(Mock.mock({
+            HEAD: {MSG: '', CODE: '000'},
+            BODY: {
+                "rows|10": [
+                    {
+                        policyActivationId: '激活政策ID',
+                        depositAmount: '押金金额',
+                        cashbackAmount: '返现金额',
+                        state: 1,
+                        record: '描述',
                     }
                 ],
                 pageTotal: 1,

@@ -9,8 +9,8 @@ export default class BaseService {
 
     constructor() {
         this.$request = axios.create({
-            baseURL: GLOBAL.hostUri,
-            //baseURL: 'http://10.10.5.198:8090',
+            //baseURL: GLOBAL.hostUri,
+            baseURL: 'http://10.10.5.198:8090',
             //timeout: 10000,
             headers: {'token': '1234', 'Content-Type': 'application/json'},
         });
@@ -24,8 +24,8 @@ export default class BaseService {
     }
 
     public request(functionCode, param, dto) {
-        return this.$request.post(`/rest/main/${functionCode}`, {"HEAD":{"token":"1234"},"BODY":param}).then(dto);
-        //return this.$request.post(`/${functionCode}`, {"HEAD":{"token":"1234"},"BODY":param}).then(dto);
+        //return this.$request.post(`/rest/main/${functionCode}`, {"HEAD":{"token":"1234"},"BODY":param}).then(dto);
+        return this.$request.post(`/${functionCode}`, {"HEAD":{"token":"1234"},"BODY":param}).then(dto);
     }
 
 }

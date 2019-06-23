@@ -65,15 +65,7 @@ export class AgentManagement extends Component {
         }
     }
 
-    public getItem = (id) => {
-        let o: any = {};
-        this.state.items.forEach((item) => {
-            if (item.agentId === id) {
-                o = item;
-            }
-        });
-        return o;
-    }
+    
 
     public searchData = async () => {
         this.setState({tableLoading: true});
@@ -89,35 +81,7 @@ export class AgentManagement extends Component {
         }
     }
 
-    public freeze = (item) => async () => {
-        this.setState({tableLoading: true});
-        const {state, mobile} = item;
-        const {HEAD} = await indexService.AGT_003({mobile, state: state === 1 ? 10 : 1});
-        const {MSG, CODE} = HEAD;
-        if (CODE === '000') {
-            this.searchData();
-        } else {
-            message.error(MSG);
-        }
-    }
-
-    public setParam = (item) => () => {
-        const {agentId} = item;
-        console.log(agentId);
-        this.setState({visible: true, currentItem: {agentId}});
-    }
-
-    public resetPwd = (item) => async () => {
-        this.setState({tableLoading: true});
-        const {mobile} = item;
-        const {HEAD} = await indexService.AGT_005({mobile});
-        const {MSG, CODE} = HEAD;
-        if (CODE === '000') {
-            this.searchData();
-        } else {
-            message.error(MSG);
-        }
-    }
+    
 
     public handleChange = (key) => (e) => {
         console.log(`change value ${key}:${e.target.value}`);

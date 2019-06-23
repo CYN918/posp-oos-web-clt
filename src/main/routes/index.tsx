@@ -37,6 +37,16 @@ const pages: IModuleProps[] = [
         exact: false,
         module: asyncComponent(() => import(/* webpackChunkName: "posp/chunks/statistical" */'./statistical'))
     },// 统计管理
+    {
+        path: '/advertising',
+        exact: false,
+        module: asyncComponent(() => import(/* webpackChunkName: "posp/chunks/advertising" */'./advertising'))
+    },// 广告管理
+    {
+        path: '/systemManagement',
+        exact: false,
+        module: asyncComponent(() => import(/* webpackChunkName: "posp/chunks/systemManagement" */'./systemManagement'))
+    },// 系统管理
 
 ];
 

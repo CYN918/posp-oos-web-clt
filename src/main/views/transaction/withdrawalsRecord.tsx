@@ -14,6 +14,7 @@ export class WithdrawalsRecord extends Component {
     public state: any = {
         header: [],
         items: [],
+        btnDisabled: false,
         tableLoading: false,
         pagination: {
             total: 0,
@@ -38,16 +39,72 @@ export class WithdrawalsRecord extends Component {
 
     public searchData = async () => {
         this.setState({tableLoading: true});
-        const {HEAD, BODY} = await indexService.ORD_004(this.searchParam);
+        const {HEAD, BODY} = await indexService.ORD_006(this.searchParam);
         const {MSG, CODE} = HEAD;
         if (CODE === '000') {
             const {header, rows, total} = BODY;
+            const newObj = [];
+            rows.forEach((item, index) => {                
+                const obj = {
+                    withdrawId: item.withdrawId,
+                    orderNo: item.orderNo,
+                    createTime: item.createTime,
+                    agentName: item.agentName,
+                    mobile: item.mobile,                    
+                    amount: (item.amount)/100,
+                    fee: (item.fee)/100,
+                    actualAmount: (item.actualAmount)/100,
+                    payBankNo: item.payBankNo,
+                    payTime: item.payTime,                    
+                    state: item.state,
+                }
+                newObj.push(obj)
+            })
             const pagination = {...this.state.pagination};
             pagination.total = total;
-            this.setState({header, items: rows, tableLoading: false, pagination});
+            header.push({
+                title: '操作', dataIndex: 'withdrawId', key: 'withdrawId', fixed: 'right', width: 100,
+                render: (id) => {                    
+                    const item = this.getItem(id);                   
+                    return (
+                        <div className="btn-group">
+                            <Button style={{marginLeft: 10}} size="small" onClick={this.setParam(item)}>出款</Button>
+                        </div>
+                    );
+                },
+            });
+            this.setState({header, items: newObj, tableLoading: false, pagination});
         } else {
             message.error(MSG);
         }
+    }
+
+    public getItem = (id) => {
+        let o: any = {};
+        this.state.items.forEach((item) => {
+            if (item.withdrawId === id) {
+                o = item;
+            }
+        });
+        return o;
+    }
+
+    public setParam = (item) => () => {        
+        const {withdrawId} = item;
+        this.loadPolicy(withdrawId);
+    }
+
+    //出款
+    public loadPolicy = async (withdrawId) => {
+        this.setState({policyLoading: true});         
+        const {HEAD, BODY} = await indexService.ORD_007({"withdrawId":withdrawId});
+        const {MSG, CODE} = HEAD;
+        if (CODE === '000') {
+            message.success(MSG);
+        } else {
+            message.error(MSG);
+        }
+        
     }
 
     public handleTableChange = (pagination) => {

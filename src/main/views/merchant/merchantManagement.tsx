@@ -55,13 +55,28 @@ export class MerchantManagement extends Component {
         const {MSG, CODE} = HEAD;
         if (CODE === '000') {
             const {header, rows, total} = BODY;
+            const newObj = [];
+            rows.forEach((item, index) => {                
+                const obj = {
+                    realName: item.realName,
+                    mobile: item.mobile,
+                    bindsn: item.bindsn,
+                    idCard: item.idCard,                    
+                    policyName: item.policyName,
+                    actnState: item.actnState,
+                    createTime: item.createTime,
+                    vipState: item.vipState,
+                    agentName: item.agentName,   
+                    txnRate: ((item.txnRate)*100).toFixed(3),         
+                }
+                newObj.push(obj)
+            })
             const pagination = {...this.state.pagination};
             pagination.total = total;
             header.push({
                 title: '操作', dataIndex: 'agentId', key: 'agentId', fixed: 'right', width: 250,
                 render: (id) => {
                     const item = this.getItem(id);
-                    console.log(item);
                     return (
                         <div className="btn-group">
                             <Button style={{marginLeft: 10}} size="small" onClick={this.resetPwd(item)}>重置密码</Button>
@@ -69,7 +84,7 @@ export class MerchantManagement extends Component {
                     );
                 },
             });
-            this.setState({header, items: rows, tableLoading: false, pagination});
+            this.setState({header, items: newObj, tableLoading: false, pagination});
         } else {
             message.error(MSG);
         }

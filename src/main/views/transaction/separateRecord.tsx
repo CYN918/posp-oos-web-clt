@@ -40,13 +40,30 @@ export class SeparateRecord extends Component {
 
     public searchData = async () => {
         this.setState({tableLoading: true});
-        const {HEAD, BODY} = await indexService.ORD_006(this.searchParam);
+        const {HEAD, BODY} = await indexService.ORD_004(this.searchParam);
         const {MSG, CODE} = HEAD;
         if (CODE === '000') {
             const {header, rows, total} = BODY;
+            const newObj = [];
+            rows.forEach((item, index) => {                
+                const obj = {
+                    orderNo: item.orderNo,
+                    createTime: item.createTime,
+                    sn: item.sn,
+                    txnType: item.txnType,                    
+                    realName: item.realName,
+                    mobile: item.mobile,
+                    agentName: item.agentName,
+                    agentMobile: item.agentMobile,
+                    txnAmount: (item.txnAmount)/100,                    
+                    shareAmount: (item.shareAmount)/100,
+                    profitState: item.profitState,
+                }
+                newObj.push(obj)
+            })
             const pagination = {...this.state.pagination};
             pagination.total = total;
-            this.setState({header, items: rows, tableLoading: false, pagination});
+            this.setState({header, items: newObj, tableLoading: false, pagination});
         } else {
             message.error(MSG);
         }

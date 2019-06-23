@@ -42,9 +42,24 @@ export class CashBackRecord extends Component {
         const {MSG, CODE} = HEAD;
         if (CODE === '000') {
             const {header, rows, total} = BODY;
+            const newObj = [];
+            rows.forEach((item, index) => {                
+                const obj = {
+                    orderNo: item.orderNo,
+                    createTime: item.createTime,
+                    bindSn: item.bindSn,
+                    profitType: item.profitType,                    
+                    realName: item.realName,
+                    mobile: item.mobile,
+                    shareAmount: (item.shareAmount)/100,
+                    toPrice: (item.toPrice)/100,
+                    agentName: item.agentName,            
+                }
+                newObj.push(obj)
+            })
             const pagination = {...this.state.pagination};
             pagination.total = total;
-            this.setState({header, items: rows, tableLoading: false, pagination});
+            this.setState({header, items: newObj, tableLoading: false, pagination});
         } else {
             message.error(MSG);
         }

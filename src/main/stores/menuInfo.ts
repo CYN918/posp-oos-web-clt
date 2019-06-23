@@ -76,6 +76,22 @@ export const menuList = [
             {key: 'incomeStatistics', name: '收益统计'},
         ]
     },
+    {
+        key: 'advertising',
+        name: '公告管理',
+        icon: 'alert',
+        children: [
+            {key: 'adManagement', name: '公告管理'},
+        ]
+    },
+    {
+        key: 'systemManagement',
+        name: '系统管理',
+        icon: 'alert',
+        children: [
+            {key: 'appManagement', name: 'APP版本管理'},
+        ]
+    },
 ];
 
 class MenuInfo {

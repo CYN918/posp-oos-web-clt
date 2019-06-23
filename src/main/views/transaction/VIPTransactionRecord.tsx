@@ -42,9 +42,23 @@ export class VIPTransactionRecord extends Component {
         const {MSG, CODE} = HEAD;
         if (CODE === '000') {
             const {header, rows, total} = BODY;
+            const newObj = [];
+            rows.forEach((item, index) => {                
+                const obj = {
+                    orderNo: item.orderNo,
+                    createTime: item.createTime,
+                    realName: item.realName,
+                    payeeMobile: item.payeeMobile,                    
+                    txnAmount: (item.txnAmount)/100,
+                    buyAmount: item.buyAmount,
+                    agentName: item.agentName,
+                    txnState: item.txnState,
+                }
+                newObj.push(obj)
+            })
             const pagination = {...this.state.pagination};
             pagination.total = total;
-            this.setState({header, items: rows, tableLoading: false, pagination});
+            this.setState({header, items: newObj, tableLoading: false, pagination});
         } else {
             message.error(MSG);
         }
@@ -69,7 +83,7 @@ export class VIPTransactionRecord extends Component {
                 <Row>
                     <Col span={8}>
                         <Form.Item label="手机号" labelCol={{span: 6}} wrapperCol={{span: 16}}>
-                            <Input placeholder="请输入手机号" onChange={this.handleChange('payeeMobile')}/>
+                            <Input maxLength={11} placeholder="请输入手机号" onChange={this.handleChange('payeeMobile')}/>
                         </Form.Item>
                     </Col>
                     <Col span={8}>

@@ -33,12 +33,32 @@ const CST001Dto = (result) => {
                     break;
                 case 'actnState':
                     o.title = '激活状态';
+                    o.render = (ele) => {
+                        switch (ele) {
+                            case 1:
+                                return '未激活';
+                            case 10:
+                                return '已激活';
+                            default:
+                                return '';
+                        }
+                    };
                     break;
                 case 'createTime':
                     o.title = '加入时间';
                     break;
                 case 'vipState':
                     o.title = '是否VIP';
+                    o.render = (ele) => {
+                        switch (ele) {
+                            case 1:
+                                return '是';
+                            case 11:
+                                return '已过期';
+                            default:
+                                return '';
+                        }
+                    };
                     break;
                 case 'agentName':
                     o.title = '归属代理商';
@@ -94,6 +114,20 @@ const CST003Dto = (result) => {
                     break;
                 case 'state':
                     o.title = '状态';
+                    o.render = (ele) => {
+                        switch (ele) {
+                            case 1:
+                                return '未绑定';
+                            case 2:
+                                return '未认证';
+                            case 10:
+                                return '已绑定';
+                            case 11:
+                                return '已认证';
+                            default:
+                                return '';
+                        }
+                    };
                     break;
             }
             return o;

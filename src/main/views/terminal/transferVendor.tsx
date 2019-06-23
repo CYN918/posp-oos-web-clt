@@ -7,8 +7,8 @@ import indexService from '../../services/terminalService';
 export class TransferVendor extends Component {
 
     public searchParam: any = {
-        currentPage: 1,
-        pageSize: 10,
+        "currentPage": "1",
+        "pageSize": "10",
     };
 
     public state: any = {
@@ -38,10 +38,12 @@ export class TransferVendor extends Component {
         });
         return o;
     }
+    
 
+    //厂商列表数据渲染
     public searchData = async () => {
         this.setState({tableLoading: true});
-        const {HEAD, BODY} = await indexService.POS_001(this.searchParam);
+        const {HEAD, BODY} = await indexService.POS_009(this.searchParam);
         const {MSG, CODE} = HEAD;
         if (CODE === '000') {
             const {header, rows, total} = BODY;
@@ -76,6 +78,12 @@ export class TransferVendor extends Component {
 
     //新增厂商
     public addSure = async () => {
+        const data = this.state.curItem;
+        console.log(data)
+        if(JSON.stringify(data) == '{}'){
+            message.info('提交不能为空');
+            return false
+        }
         this.setState({modalLoading: true});
         const {HEAD, BODY} = await indexService.POS_008(this.state.curItem);
         const {MSG, CODE} = HEAD;
@@ -84,7 +92,8 @@ export class TransferVendor extends Component {
             this.setState({
               visible: false,
             });
-            this.searchData();           
+            this.searchData(); 
+            this.setState({modalLoading: false});          
         } else {
             message.error(MSG);
         }
@@ -96,7 +105,8 @@ export class TransferVendor extends Component {
         this.searchParam[key] = e.target.value;
     };
 
-    public handleChangeParam = (key) => (e) => {        
+    public handleChangeParam = (key) => (e) => { 
+        const curItem = Object.assign({}, this.state.curItem);       
         console.log(`change value ${key}:${e.target.value}`);
         curItem[key] = e.target.value;
         this.setState({curItem});               
@@ -106,14 +116,14 @@ export class TransferVendor extends Component {
         const {header, items, tableLoading, pagination} = this.state;
         return (
             <Fragment>
-                <Row>                   
-                    <Col span={8} labelCol={{span: 6}} wrapperCol={{span: 16}}>
+                <Row>          
+                    <Col span={8}>
                         <Button type="primary" style={{top: 0, position: 'absolute', left: 0}}
                                 onClick={this.newData}>新增</Button>
                     </Col>
                 </Row>
                 <Table columns={header} onChange={this.handleTableChange} pagination={pagination} loading={tableLoading}
-                       dataSource={items} scroll={{x: 2000}} size="middle" style={{position: 'relative', top: 40}}/>
+                       dataSource={items} scroll={{x: 2000}} size="middle" style={{position: 'relative',top: 40}}/ >
                 {this.renderaddModal()}
             </Fragment>
         );

@@ -42,9 +42,22 @@ export class RepaymentOrder extends Component {
         const {MSG, CODE} = HEAD;
         if (CODE === '000') {
             const {header, rows, total} = BODY;
+            const newObj = [];
+            rows.forEach((item, index) => {                
+                const obj = {
+                    orderNo: item.orderNo,
+                    createTime: item.createTime,
+                    realName: item.realName,
+                    payeeMobile: item.payeeMobile,                    
+                    txnAmount: (item.txnAmount)/100,
+                    agentName: item.agentName,
+                    txnState: item.txnState,
+                }
+                newObj.push(obj)
+            })
             const pagination = {...this.state.pagination};
             pagination.total = total;
-            this.setState({header, items: rows, tableLoading: false, pagination});
+            this.setState({header, items: newObj, tableLoading: false, pagination});
         } else {
             message.error(MSG);
         }
