@@ -135,7 +135,7 @@ export class TerminalStorage extends Component {
           uploading: true,
         });
         reqwest({
-          url: 'http://10.10.5.198:8090/POS_007',
+          url: 'http://10.10.5.237:8081/POS_007',
           method: 'post',
           processData: false,
           data: formData,

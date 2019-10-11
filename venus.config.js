@@ -21,7 +21,7 @@ module.exports = {
     baseOption: {
         px2rem: true,
         cdnPath: [
-            '//http://file.40017.cn/jinfu/'
+            '//10.10.5.237:9000/public/'
         ],
         projectCwd: join(__dirname, 'src'),
         outputPath: resolve(__dirname, 'public'),

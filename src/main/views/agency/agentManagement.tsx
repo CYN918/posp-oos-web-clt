@@ -580,7 +580,7 @@ export class AgentManagement extends Component {
     
     //解析城市json文件
     public init(){
-        fetch('http://dev.venus.org:3001/city.json', {
+        fetch('http://10.10.5.237:9000/public/city.json', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',

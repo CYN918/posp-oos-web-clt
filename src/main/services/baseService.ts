@@ -10,7 +10,7 @@ export default class BaseService {
     constructor() {
         this.$request = axios.create({
             //baseURL: GLOBAL.hostUri,
-            baseURL: 'http://10.10.5.198:8090',
+            baseURL: 'http://10.10.5.237:8081',
             //timeout: 10000,
             headers: {'token': '1234', 'Content-Type': 'application/json'},
         });
